@@ -1,11 +1,24 @@
 import React, {useEffect, useState} from 'react'
+import axios from 'axios'
 
 function App() {
 
   const [backendData, setBackendData] = useState([{}])
 
   useEffect(() => {
-    fetch("/api").then(
+
+    const axiosGetCall = async () => {
+      try {
+        const {data} = await axios.get('/api')
+        setBackendData(data)
+        console.log("axios conversion success")
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    axiosGetCall();
+    /**fetch("/api").then(
       response => response.json()
     ).then(
       data => {
@@ -13,7 +26,7 @@ function App() {
       },
       console.log("useEffect")
 
-    )
+    )**/
   }, [])
   return (
     <div>
