@@ -1,3 +1,3 @@
 test('test that github actions is working backend', () => {
-  expect(4).toBe(4)
+  expect(7).toBe(7)
 })
