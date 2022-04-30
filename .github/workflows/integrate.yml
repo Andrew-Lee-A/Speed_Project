@@ -14,4 +14,14 @@ jobs:
           node-version: 16
       - run: npm ci
       - run: npm test
+  test_build_frontend_pull_request:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./client
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16
       - run: npm run build
