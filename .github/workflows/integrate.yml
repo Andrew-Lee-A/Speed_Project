@@ -1,0 +1,31 @@
+name: Project Pipeline
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  test_front_end_pull_request:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+  test_back_end_pull_request:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16
+      - run: npm ci
+      - run: npm test
