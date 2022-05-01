@@ -1,23 +1,22 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { ArticleTable } from './components/ArticleTable'
 
 function App() {
-
   const [backendData, setBackendData] = useState([{}])
 
   useEffect(() => {
-
     const axiosGetCall = async () => {
       try {
-        const {data} = await axios.get('/api')
+        const { data } = await axios.get('/api')
         setBackendData(data)
-        console.log("axios conversion success")
+        console.log('axios conversion success')
       } catch (error) {
         console.log(error)
       }
     }
 
-    axiosGetCall();
+    axiosGetCall()
     /**fetch("/api").then(
       response => response.json()
     ).then(
@@ -30,13 +29,14 @@ function App() {
   }, [])
   return (
     <div>
-      {(typeof backendData.users === 'undefined') ?  (
+      <ArticleTable />
+      {/* {(typeof backendData.users === 'undefined') ?  (
         <p> Loading...</p>
       ): (
         backendData.users.map((user, i) => (
           <p key = {i}>{user}</p>
         ))
-      )}
+      )} */}
     </div>
   )
 }
