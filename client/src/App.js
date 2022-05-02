@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { ArticleTable } from './components/ArticleTable'
+import './stylesheet.css'
 
 function App() {
   const [backendData, setBackendData] = useState([{}])
