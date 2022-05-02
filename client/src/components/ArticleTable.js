@@ -1,9 +1,11 @@
-import Table from '@mui/material/Table'
-import TableContainer from '@mui/material/TableContainer'
-import TableHead from '@mui/material/TableHead'
-import TableRow from '@mui/material/TableRow'
-import TableCell from '@mui/material/TableCell'
-import TableBody from '@mui/material/TableBody'
+import {
+  Table,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+} from '@mui/material'
 
 export const ArticleTable = () => {
   // fetch all articles from db
@@ -58,16 +60,17 @@ export const ArticleTable = () => {
         </TableHead>
         <TableBody>
           {data.map((item) => {
-            //   return (
-            //     <TableRow key={item.doi} >
-            //         <TableCell>{item.title}</TableCell>
-            //         <TableCell>{item.authors}</TableCell>
-            //         <TableCell>{item.source}</TableCell>
-            //         <TableCell>{item.doi}</TableCell>
-            //         <TableCell>{item.claimedBenefit}</TableCell>
-            //         <TableCell>{item.levelOfEvidence}</TableCell>
-            //     <TableRow />
-            //     )
+            return (
+              <TableRow key={item.doi}>
+                <TableCell>{item.title}</TableCell>
+                <TableCell>{item.authors}</TableCell>
+                <TableCell>{item.source}</TableCell>
+                <TableCell>{item.pubYear}</TableCell>
+                <TableCell>{item.doi}</TableCell>
+                <TableCell>{item.claimedBenefit}</TableCell>
+                <TableCell>{item.levelOfEvidence}</TableCell>
+              </TableRow>
+            )
           })}
         </TableBody>
       </Table>
