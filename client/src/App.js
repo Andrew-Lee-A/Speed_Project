@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { ArticleTable } from './components/ArticleTable'
 import './stylesheet.css'
+import { ThemeProvider } from '@emotion/react'
+import colorTheme from './theme'
 
 function App() {
   const [backendData, setBackendData] = useState([{}])
@@ -30,7 +32,9 @@ function App() {
   }, [])
   return (
     <div>
-      <ArticleTable />
+      <ThemeProvider theme={colorTheme}>
+        <ArticleTable />
+      </ThemeProvider>
       {/* {(typeof backendData.users === 'undefined') ?  (
         <p> Loading...</p>
       ): (

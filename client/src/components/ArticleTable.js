@@ -8,10 +8,37 @@ import {
   TableBody,
   TableFooter,
   TablePagination,
+  Button,
   Paper,
+  styled,
+  tableCellClasses,
 } from '@mui/material'
+import theme from '../theme'
 
 const ROWS_PER_PAGE = 5
+
+const TableCellVariant = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.secondary.main,
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    backgroundColor: theme.palette.secondary.main,
+    color: theme.palette.common.white,
+  },
+  [`$.${tableCellClasses.body}`]: {
+    fontSize: '14',
+  },
+}))
+
+const TablePaginationVariant = styled(TablePagination)(({ theme }) => ({
+  backgroundColor: theme.palette.secondary.main,
+  color: theme.palette.common.white,
+}))
+
+const TableBtn = styled(Button)(({ theme }) => ({
+  color: theme.palette.common.white,
+}))
 
 export const ArticleTable = () => {
   const [currentPage, setCurrentPage] = useState(0)
@@ -41,7 +68,7 @@ export const ArticleTable = () => {
   }
 
   const handleArticleClicked = (e) => {
-    console.log('I was clicked')
+    console.log(e.target.value)
   }
 
   return (
@@ -50,13 +77,14 @@ export const ArticleTable = () => {
         <Table aria-label='software development process article table'>
           <TableHead>
             <TableRow>
-              <TableCell>Title</TableCell>
-              <TableCell>Authors</TableCell>
-              <TableCell>Source</TableCell>
-              <TableCell>Year Published</TableCell>
-              <TableCell>DOI</TableCell>
-              <TableCell>Claimed Benefit</TableCell>
-              <TableCell>Level of Evidence</TableCell>
+              <TableCellVariant>Title</TableCellVariant>
+              <TableCellVariant>Authors</TableCellVariant>
+              <TableCellVariant>Source</TableCellVariant>
+              <TableCellVariant>Year Published</TableCellVariant>
+              <TableCellVariant>DOI</TableCellVariant>
+              <TableCellVariant>Claimed Benefit</TableCellVariant>
+              <TableCellVariant>Level of Evidence</TableCellVariant>
+              <TableCellVariant></TableCellVariant>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -67,28 +95,34 @@ export const ArticleTable = () => {
               )
               .map((item) => {
                 return (
-                  <TableRow key={item.doi} onClick={handleArticleClicked}>
-                    <TableCell>{item.title}</TableCell>
-                    <TableCell>{item.authors}</TableCell>
-                    <TableCell>{item.source}</TableCell>
-                    <TableCell>{item.pubYear}</TableCell>
-                    <TableCell>{item.doi}</TableCell>
-                    <TableCell>{item.claimedBenefit}</TableCell>
-                    <TableCell>{item.levelOfEvidence}</TableCell>
+                  <TableRow key={item.doi} hover>
+                    <TableCellVariant>{item.title}</TableCellVariant>
+                    <TableCellVariant>{item.authors}</TableCellVariant>
+                    <TableCellVariant>{item.source}</TableCellVariant>
+                    <TableCellVariant>{item.pubYear}</TableCellVariant>
+                    <TableCellVariant>{item.doi}</TableCellVariant>
+                    <TableCellVariant>{item.claimedBenefit}</TableCellVariant>
+                    <TableCellVariant>{item.levelOfEvidence}</TableCellVariant>
+                    <TableCellVariant padding='none'>
+                      <TableBtn value={item.doi} onClick={handleArticleClicked}>
+                        View More
+                      </TableBtn>
+                    </TableCellVariant>
                   </TableRow>
                 )
               })}
           </TableBody>
           <TableFooter></TableFooter>
         </Table>
-        <TablePagination
+        <TablePaginationVariant
+          color={theme.palette.secondary.main}
           rowsPerPageOptions={[]}
           component={Paper}
           page={currentPage}
           rowsPerPage={ROWS_PER_PAGE}
           onPageChange={handleNextPage}
           count={data.length}
-          colSpan={7}
+          colSpan={8}
         />
       </TableContainer>
     </>
