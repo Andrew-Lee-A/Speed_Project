@@ -8,6 +8,8 @@ const path = require('path')
 const helmet = require('helmet')
 const cors = require('cors')
 
+const articleRouter = require('./routes/article')
+
 // general middleware
 app.use(express.json())
 app.use(helmet())
@@ -17,6 +19,8 @@ app.use(cors({ origin: true, credentials: true }))
 app.get('/api', (req, res) => {
   res.json({ users: ['userOne', 'userTwo', 'userThree'] })
 })
+
+app.use('/api/v1/article', articleRouter)
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, './client/build')))
