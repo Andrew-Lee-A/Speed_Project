@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { ArticleTable } from './components/ArticleTable'
+import { NavSideBar } from './components/NavSideBar'
 import './stylesheet.css'
 import { ThemeProvider } from '@emotion/react'
 import colorTheme from './theme'
@@ -33,7 +34,8 @@ function App() {
   return (
     <div>
       <ThemeProvider theme={colorTheme}>
-        <ArticleTable />
+        <NavSideBar />
+        {/*<ArticleTable />*/}
       </ThemeProvider>
       {/* {(typeof backendData.users === 'undefined') ?  (
         <p> Loading...</p>
