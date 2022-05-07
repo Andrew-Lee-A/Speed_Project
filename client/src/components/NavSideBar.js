@@ -1,8 +1,21 @@
-import { Paper, Link } from '@mui/material'
+import { Paper, Link, styled } from '@mui/material'
+
+const Bar = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.secondary.main,
+  color: theme.palette.common.white,
+}))
+
+const StyledLink = styled(Link)(({ theme }) => ({
+  backgroundColor: theme.palette.secondary.main,
+  color: theme.palette.common.white,
+  '&:hover': {
+    color: '#29D6B5',
+  },
+}))
 
 export const NavSideBar = () => {
   return (
-    <Paper
+    <Bar
       sx={{
         width: '10%',
         display: 'flex',
@@ -15,15 +28,15 @@ export const NavSideBar = () => {
         paddingBottom: '0.5rem',
       }}
     >
-      <Link component={'button'} underline='none'>
+      <StyledLink component={'button'} underline='none'>
         Home
-      </Link>
-      <Link component={'button'} underline='none'>
+      </StyledLink>
+      <StyledLink component={'button'} underline='none'>
         Articles
-      </Link>
-      <Link component={'button'} underline='none'>
+      </StyledLink>
+      <StyledLink component={'button'} underline='none'>
         Create Article
-      </Link>
-    </Paper>
+      </StyledLink>
+    </Bar>
   )
 }
