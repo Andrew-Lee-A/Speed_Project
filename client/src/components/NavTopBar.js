@@ -23,6 +23,7 @@ export const NavTopBar = () => {
         width: '100%',
         height: '10%',
         padding: '0.8rem',
+        marginBottom: '2rem',
       }}
     >
       <Typography>SPEED</Typography>

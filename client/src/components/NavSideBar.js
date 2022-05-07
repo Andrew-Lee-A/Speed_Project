@@ -21,11 +21,13 @@ export const NavSideBar = () => {
         display: 'flex',
         flexDirection: 'column',
         WebkitAlignItems: 'center',
-        position: 'absolute',
+        position: 'box',
         gap: '1rem',
-        margin: '1rem',
         paddingTop: '0.5rem',
         paddingBottom: '0.5rem',
+        marginRight: '2rem',
+        marginLeft: '0.5rem',
+        height: '5rem',
       }}
     >
       <StyledLink component={'button'} underline='none'>
