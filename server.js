@@ -9,6 +9,7 @@ const helmet = require('helmet')
 const cors = require('cors')
 
 const articleRouter = require('./routes/article')
+const authRouter = require('./routes/authentication')
 
 // general middleware
 app.use(express.json())
@@ -21,6 +22,7 @@ app.get('/api', (req, res) => {
 })
 
 app.use('/api/v1/article', articleRouter)
+app.use('/api/v1/auth', authRouter)
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, './client/build')))
