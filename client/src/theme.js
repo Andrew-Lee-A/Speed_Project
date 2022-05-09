@@ -12,6 +12,9 @@ const theme = createTheme({
       secondary: '#212124',
     },
   },
+  typography: {
+    fontFamily: 'Source Code Pro, monospace',
+  },
 })
 
 export default theme
