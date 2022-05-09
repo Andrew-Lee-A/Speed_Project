@@ -68,7 +68,6 @@ export const ArticleTable = () => {
 
   //sort function
   function stableSort(array, comparator) {
-    console.log(array);
     const stabilizedThis = array.map((el, index) => [el, index]);
     stabilizedThis.sort((a, b) => {
       const order = comparator(a[0], b[0]);
@@ -76,14 +75,15 @@ export const ArticleTable = () => {
         
         return order;
       }
-      console.log("a[1]: " + a[1] + " b[1]: " + b[1])
+      console.log(a[1] - b[1]);
       return a[1] - b[1];
     });
     console.log(stabilizedThis.map((el) => el[0]));
     
-    console.log("orderby" + orderBy)
+    console.log("orderby " + orderBy)
     return stabilizedThis.map((el) => el[0]);
   }
+
   //comparator
   function getComparator(order, orderBy) {
     return order === 'desc'
@@ -93,7 +93,7 @@ export const ArticleTable = () => {
 
   //
   function descendingComparator(a, b, orderBy) {
-    console.log("b: " + b + " " + b[orderBy] + " a: " + a + " "+ a[orderBy])
+    console.log("orderBy: " + orderBy + " b: " + b + " " + b[orderBy] + " a: " + a + " "+ a[orderBy])
     if (b[orderBy] < a[orderBy]) {
       
       return -1;
@@ -154,12 +154,12 @@ export const ArticleTable = () => {
                 </TableSortLabel>
               </TableCellVariant>
               <TableCellVariant
-                id='DOI-id'
-                sortDirection = {orderBy === 'DOI-id' ? order:false}>
+                id='doi'
+                sortDirection = {orderBy === 'doi' ? order:false}>
                 <TableSortLabel
-                  active = {orderBy === 'DOI-id'}
-                  direction = {orderBy === 'DOI-id' ? order : 'asc'}
-                  onClick={ () => {handleSortRequest('DOI-id')}}>
+                  active = {orderBy === 'doi'}
+                  direction = {orderBy === 'doi' ? order : 'asc'}
+                  onClick={ () => {handleSortRequest('doi')}}>
                   DOI
                 </TableSortLabel>
               </TableCellVariant>
