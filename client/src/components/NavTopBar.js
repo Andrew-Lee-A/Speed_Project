@@ -1,4 +1,6 @@
-import { Box, Link, Typography, styled } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
+import { Box, Button, Link, Typography, styled } from '@mui/material'
+import theme from '../theme'
 
 const NavBox = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.secondary.main,
@@ -14,6 +16,24 @@ const LinkStyled = styled(Link)(({ theme }) => ({
 }))
 
 export const NavTopBar = () => {
+  let navigate = useNavigate()
+  let loggedIn = false // should be checked with axios call
+
+  function handleClick(e) {
+    const { name } = e.target
+
+    switch (name) {
+      case 'login':
+        navigate('/login')
+        break
+      case 'signup':
+        navigate('/signup')
+        break
+      default:
+        break
+    }
+  }
+
   return (
     <NavBox
       sx={{
@@ -26,15 +46,32 @@ export const NavTopBar = () => {
         marginBottom: '2rem',
       }}
     >
-      <Typography>SPEED</Typography>
-      <Box sx={{ display: 'flex', gap: '1rem', marginRight: '1.5rem' }}>
-        <LinkStyled component={'button'} underline='none'>
-          Articles
-        </LinkStyled>
-        <LinkStyled component={'button'} underline='none'>
-          Create Article
-        </LinkStyled>
-      </Box>
+      <Typography sx={{ alignSelf: 'center' }}>SPEED</Typography>
+      {!loggedIn ? (
+        <Box sx={{ display: 'flex', gap: '1rem', marginRight: '1.5rem' }}>
+          <LinkStyled
+            onClick={handleClick}
+            component={Button}
+            underline='none'
+            name='login'
+          >
+            Login
+          </LinkStyled>
+          <LinkStyled
+            onClick={handleClick}
+            sx={{ backgroundColor: theme.palette.primary.main }}
+            component={Button}
+            underline='none'
+            name='signup'
+          >
+            Sign Up
+          </LinkStyled>
+        </Box>
+      ) : (
+        <Typography sx={{ alignSelf: 'center', marginRight: '1.5rem' }}>
+          Welcome ...
+        </Typography>
+      )}
     </NavBox>
   )
 }
