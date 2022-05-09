@@ -42,11 +42,13 @@ export const NavTopBar = () => {
         backgoundColor: 'red',
         width: '100%',
         height: '10%',
-        padding: '0.8rem',
+        padding: '0.8rem 0rem',
         marginBottom: '2rem',
       }}
     >
-      <Typography sx={{ alignSelf: 'center' }}>SPEED</Typography>
+      <Typography sx={{ alignSelf: 'center', marginLeft: '1.5rem' }}>
+        SPEED
+      </Typography>
       {!loggedIn ? (
         <Box sx={{ display: 'flex', gap: '1rem', marginRight: '1.5rem' }}>
           <LinkStyled
