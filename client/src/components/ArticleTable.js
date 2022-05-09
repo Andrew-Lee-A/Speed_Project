@@ -9,12 +9,17 @@ import {
   TableFooter,
   TablePagination,
   TableSortLabel,
+  Toolbar,
   Button,
   Paper,
   styled,
   tableCellClasses,
+  TextField,
+  InputAdornment,
 } from '@mui/material'
 import theme from '../theme'
+import Input from './component-controller/Input.js'
+import { Search } from '@mui/icons-material';
 
 const ROWS_PER_PAGE = 5
 
@@ -78,22 +83,18 @@ export const ArticleTable = () => {
       console.log(a[1] - b[1]);
       return a[1] - b[1];
     });
-    console.log(stabilizedThis.map((el) => el[0]));
-    
-    console.log("orderby " + orderBy)
     return stabilizedThis.map((el) => el[0]);
   }
 
-  //comparator
   function getComparator(order, orderBy) {
     return order === 'desc'
       ? (a, b) => descendingComparator(a, b, orderBy)
       : (a, b) => -descendingComparator(a, b, orderBy);
   }
 
-  //
+
   function descendingComparator(a, b, orderBy) {
-    console.log("orderBy: " + orderBy + " b: " + b + " " + b[orderBy] + " a: " + a + " "+ a[orderBy])
+    //a and b are the rows we are comparing. orderby is the field so we comparing a and b on.
     if (b[orderBy] < a[orderBy]) {
       
       return -1;
@@ -124,17 +125,35 @@ export const ArticleTable = () => {
 
   return (
     <>
+      <Toolbar>
+        <Input
+        variant = "outlined"
+        label = "Search Table"
+        InputProps={{
+          startAdornment: (<InputAdornment position= "start">
+            <Search/>
+          </InputAdornment>)
+        }}>
+        
+        </Input>
+      </Toolbar>    
       <TableContainer>
         <Table aria-label='software development process article table'>
           <TableHead>
             <TableRow>
               <TableCellVariant
-                id='title-id'
-                sortDirection = {orderBy === 'title-id' ? order:false}>
+                id='title'
+                sortDirection = {orderBy === 'title' ? order:false}>
                 <TableSortLabel 
-                  active = {orderBy === 'title-id'}
-                  direction = {orderBy === 'title-id' ? order : 'asc'}
-                  onClick={ () => {handleSortRequest('title-id')}}>
+                  sx = {{
+                      '&.MuiTableSortLabel-root': {color: 'white',},
+                      '&.MuiTableSortLabel-root:hover': {color: '#29D6B5',},
+                      '&.Mui-active': {color: '#29D6B5', },
+                      '& .MuiTableSortLabel-icon': {color: '#29D6B5!important',
+                  },}}
+                  active = {orderBy === 'title'}
+                  direction = {orderBy === 'title' ? order : 'asc'}
+                  onClick={ () => {handleSortRequest('title')}}>
                   Title
                 </TableSortLabel>
               </TableCellVariant>
@@ -157,6 +176,22 @@ export const ArticleTable = () => {
                 id='doi'
                 sortDirection = {orderBy === 'doi' ? order:false}>
                 <TableSortLabel
+                  sx = {
+                    {
+                        '&.MuiTableSortLabel-root': {
+                            color: 'white',
+                        },
+                        '&.MuiTableSortLabel-root:hover': {
+                            color: '#29D6B5',
+                        },
+                        '&.Mui-active': {
+                            color: '#29D6B5',
+                        },
+                        '& .MuiTableSortLabel-icon': {
+                            color: '#29D6B5!important',
+                        },
+                    }
+                }
                   active = {orderBy === 'doi'}
                   direction = {orderBy === 'doi' ? order : 'asc'}
                   onClick={ () => {handleSortRequest('doi')}}>
