@@ -5,6 +5,10 @@ export default function Input (props){
     const {name, label, value, error = null, onChange, ...other} = props;
     return (
         <TextField
+        sx = {{
+            '&.MuiInputLabel-root.MuiFormLabel-root': {color: 'white',},
+            //TODO
+        }}
         variant='outlined'
         label={label}
         name={name}

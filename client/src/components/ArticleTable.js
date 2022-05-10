@@ -53,6 +53,9 @@ export const ArticleTable = () => {
   const [order, setOrder] = useState()
   const [orderBy, setOrderBy] = useState()
 
+  //
+  const [filterFn, setFilterFn] = useState({ fn: items => { return items; } })
+
   // fetch all articles from db
   function getData() {
     const arr = []
@@ -80,7 +83,6 @@ export const ArticleTable = () => {
         
         return order;
       }
-      console.log(a[1] - b[1]);
       return a[1] - b[1];
     });
     return stabilizedThis.map((el) => el[0]);
@@ -123,19 +125,33 @@ export const ArticleTable = () => {
     console.log(e.target.value)
   }
 
+  const handleSearch = e => {
+    let target = e.target;
+    console.log(target.value);
+    setFilterFn({
+        fn: items => {
+            if (target.value === "")
+                return items;
+            else
+                return items.filter(x => x.title.toString().toLowerCase().includes(target.value.toLowerCase()));
+        }
+    })
+}
+
   return (
     <>
       <Toolbar>
-        <Input
+        <Input 
+        
         variant = "outlined"
         label = "Search Table"
         InputProps={{
           startAdornment: (<InputAdornment position= "start">
             <Search/>
           </InputAdornment>)
-        }}>
-        
-        </Input>
+        }}
+        onChange = {handleSearch}
+        />
       </Toolbar>    
       <TableContainer>
         <Table aria-label='software development process article table'>
@@ -214,7 +230,7 @@ export const ArticleTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {stableSort(data, getComparator(order, orderBy))
+            {stableSort(filterFn.fn(data), getComparator(order, orderBy))
               .slice(
                 currentPage * ROWS_PER_PAGE,
                 currentPage * ROWS_PER_PAGE + ROWS_PER_PAGE
