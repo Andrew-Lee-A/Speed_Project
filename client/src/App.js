@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { ArticleTable } from './components/ArticleTable'
+import ArticleFormHeader from './components/component-controller/ArticleFormHeader'
 import './stylesheet.css'
 import { ThemeProvider } from '@emotion/react'
 import colorTheme from './theme'
+import ArticleIcon from '@mui/icons-material/Article';
 
 function App() {
   const [backendData, setBackendData] = useState([{}])
@@ -33,15 +35,13 @@ function App() {
   return (
     <div>
       <ThemeProvider theme={colorTheme}>
+      <ArticleFormHeader
+                title='Article'
+                subTitle='Welcome User - Submit Article'
+                icon={<ArticleIcon fontSize='large'/>}
+        />
         <ArticleTable />
       </ThemeProvider>
-      {/* {(typeof backendData.users === 'undefined') ?  (
-        <p> Loading...</p>
-      ): (
-        backendData.users.map((user, i) => (
-          <p key = {i}>{user}</p>
-        ))
-      )} */}
     </div>
   )
 }
