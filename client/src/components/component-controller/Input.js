@@ -3,6 +3,7 @@ import {TextField, InputAdornment, styled} from '@mui/material'
 
 const SearchTextField = styled(TextField)(({ theme }) => ({
     backgroundColor: theme.palette.secondary.main,
+    width: '40%',
 
   '& label.Mui-focused': {
     color: '#29D6B5',

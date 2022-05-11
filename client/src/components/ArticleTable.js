@@ -60,13 +60,13 @@ export const ArticleTable = () => {
   const [order, setOrder] = useState()
   const [orderBy, setOrderBy] = useState()
 
-  //
+  //search filter const
   const [filterFn, setFilterFn] = useState({ fn: items => { return items; } })
 
   // fetch all articles from db
   function getData() {
     const arr = []
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 20; i++) {
       arr[i] = {
         title: "Bob's Burgers",
         authors: 'bob',
@@ -151,7 +151,7 @@ export const ArticleTable = () => {
         <Input 
         
         variant = "outlined"
-        label = "Search Table"
+        label = "Search by Title"
         InputProps={{
           startAdornment: (<InputAdornment position= "start">
             <Search/>
