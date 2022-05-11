@@ -12,10 +12,9 @@ import {
   Toolbar,
   Button,
   Paper,
-  styled,
   tableCellClasses,
-  TextField,
   InputAdornment,
+  styled,
 } from '@mui/material'
 import theme from '../theme'
 import Input from './component-controller/Input.js'
@@ -44,6 +43,14 @@ const TablePaginationVariant = styled(TablePagination)(({ theme }) => ({
 
 const TableBtn = styled(Button)(({ theme }) => ({
   color: theme.palette.common.white,
+}))
+
+const StyledLabel = styled(TableSortLabel)(({theme}) => ({
+  
+  ['&.MuiTableSortLabel-root']: {color: 'white'},
+  ['&.MuiTableSortLabel-root:hover']: {color: '#29D6B5'},
+  ['&.Mui-active']: {color: '#29D6B5',},
+  ['& .MuiTableSortLabel-icon']: {color: '#29D6B5!important',}
 }))
 
 export const ArticleTable = () => {
@@ -160,23 +167,22 @@ export const ArticleTable = () => {
               <TableCellVariant
                 id='title'
                 sortDirection = {orderBy === 'title' ? order:false}>
-                <TableSortLabel 
-                  sx = {{
-                      '&.MuiTableSortLabel-root': {color: 'white',},
-                      '&.MuiTableSortLabel-root:hover': {color: '#29D6B5',},
-                      '&.Mui-active': {color: '#29D6B5', },
-                      '& .MuiTableSortLabel-icon': {color: '#29D6B5!important',
-                  },}}
+                <StyledLabel
                   active = {orderBy === 'title'}
                   direction = {orderBy === 'title' ? order : 'asc'}
                   onClick={ () => {handleSortRequest('title')}}>
                   Title
-                </TableSortLabel>
+                </StyledLabel>
               </TableCellVariant>
-              <TableCellVariant>
-                <TableSortLabel>
+              <TableCellVariant
+              id='authors'
+              sortDirection = {orderBy === 'authors' ? order:false}>
+                <StyledLabel
+                active = {orderBy === 'authors'}
+                direction = {orderBy === 'authors' ? order : 'asc'}
+                onClick={ () => {handleSortRequest('authors')}}>
                   Authors
-                </TableSortLabel>
+                </StyledLabel>
               </TableCellVariant>
               <TableCellVariant>
                 <TableSortLabel>
