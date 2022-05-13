@@ -15,6 +15,8 @@ import {
   tableCellClasses,
   InputAdornment,
   styled,
+  FormControl,
+  FormControlLabel,
 } from '@mui/material'
 import theme from '../theme'
 import Input from './component-controller/Input.js'
@@ -161,10 +163,15 @@ export const ArticleTable = () => {
         onChange = {handleSearch}
         />
 
-      <AdvancedFilter>
-
-        
-      </AdvancedFilter>
+        <FormControlLabel
+        label="Advanced Search"
+        sx={{color: 'white'}}
+          control={
+            <AdvancedFilter
+      
+            />
+          }
+        />
 
       
       </Toolbar>    
