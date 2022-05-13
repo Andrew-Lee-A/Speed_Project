@@ -19,6 +19,7 @@ import {
 import theme from '../theme'
 import Input from './component-controller/Input.js'
 import { Search } from '@mui/icons-material';
+import AdvancedFilter from './component-controller/AdvancedFilter.js'
 
 const ROWS_PER_PAGE = 5
 
@@ -159,6 +160,13 @@ export const ArticleTable = () => {
         }}
         onChange = {handleSearch}
         />
+
+      <AdvancedFilter>
+
+        
+      </AdvancedFilter>
+
+      
       </Toolbar>    
       <TableContainer>
         <Table aria-label='software development process article table'>
