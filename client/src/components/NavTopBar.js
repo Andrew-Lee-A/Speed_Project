@@ -1,6 +1,8 @@
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Box, Button, Link, Typography, styled } from '@mui/material'
 import theme from '../theme'
+import axios from 'axios'
 
 const NavBox = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.secondary.main,
@@ -17,7 +19,24 @@ const LinkStyled = styled(Link)(({ theme }) => ({
 
 export const NavTopBar = () => {
   let navigate = useNavigate()
-  let loggedIn = false // should be checked with axios call
+  const [login, setLogin] = useState(null)
+
+  useEffect(() => {
+    async function getLoginData() {
+      try {
+        const { data } = await axios.get('/api/v1/userinfo', {
+          headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('JWT'),
+          },
+        })
+        setLogin(data)
+      } catch (e) {
+        console.log(e)
+      }
+    }
+
+    getLoginData()
+  }, [])
 
   function handleClick(e) {
     const { name } = e.target
@@ -49,7 +68,7 @@ export const NavTopBar = () => {
       <Typography sx={{ alignSelf: 'center', marginLeft: '1.5rem' }}>
         SPEED
       </Typography>
-      {!loggedIn ? (
+      {!login ? (
         <Box sx={{ display: 'flex', gap: '1rem', marginRight: '1.5rem' }}>
           <LinkStyled
             onClick={handleClick}
@@ -71,7 +90,7 @@ export const NavTopBar = () => {
         </Box>
       ) : (
         <Typography sx={{ alignSelf: 'center', marginRight: '1.5rem' }}>
-          Welcome ...
+          Welcome {login}
         </Typography>
       )}
     </NavBox>

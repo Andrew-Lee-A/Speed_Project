@@ -3,6 +3,7 @@ import { NavTopBar } from './NavTopBar'
 import { NavSideBar } from './NavSideBar'
 import { useNavigate } from 'react-router-dom'
 import { Stack, Paper, TextField, Button, styled } from '@mui/material'
+import axios from 'axios'
 
 const StyledTextField = styled(TextField)(({ theme }) => ({
   backgroundColor: theme.palette.secondary.main,
@@ -45,18 +46,29 @@ export default function Login() {
     })
   }
 
-  function handleClick() {
-    // send stuff to axios
-    // store in locale storage
+  async function handleClick() {
+    try {
+      if (loginData.password === loginData.passwordConfirmation) {
+        const { data } = await axios.post('/api/v1/auth/signup', {
+          username: loginData.username,
+          password: loginData.password,
+        })
 
-    setLoginData({
-      username: '',
-      password: '',
-      passwordConfirmation: '',
-    })
+        localStorage.setItem('JWT', data.token)
+        localStorage.setItem('PERMISSION', data.user.permission)
 
-    // navigate to articles now logged in
-    navigate('/')
+        setLoginData({
+          username: '',
+          password: '',
+          passwordConfirmation: '',
+        })
+        navigate('/')
+      } else {
+        throw new Error('Passwords do not match')
+      }
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   return (

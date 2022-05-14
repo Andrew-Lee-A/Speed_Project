@@ -3,6 +3,7 @@ import { NavTopBar } from './NavTopBar'
 import { NavSideBar } from './NavSideBar'
 import { useNavigate } from 'react-router-dom'
 import { Stack, Paper, TextField, Button, styled } from '@mui/material'
+import axios from 'axios'
 
 const StyledTextField = styled(TextField)(({ theme }) => ({
   backgroundColor: theme.palette.secondary.main,
@@ -44,17 +45,22 @@ export default function Login() {
     })
   }
 
-  function handleClick() {
-    // send stuff to axios
-    // store in locale storage
+  async function handleClick() {
+    try {
+      const { data } = await axios.post('/api/v1/auth/login', loginData)
 
-    setLoginData({
-      username: '',
-      password: '',
-    })
+      localStorage.setItem('JWT', data.token)
+      localStorage.setItem('PERMISSION', data.user.permission)
 
-    // navigate to articles now logged in
-    navigate('/')
+      setLoginData({
+        username: '',
+        password: '',
+      })
+
+      navigate('/')
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   return (
