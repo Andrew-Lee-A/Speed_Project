@@ -9,14 +9,14 @@ const MockLogin = () => {
   return (
     <ThemeProvider theme={colorTheme}>
       <BrowserRouter>
-        <Login />
+        <Login testing={true} />
       </BrowserRouter>
     </ThemeProvider>
   )
 }
 
 describe('Login info present and useable', () => {
-  test('should render text stating username and can be typed in', async () => {
+  it('should render text stating username and can be typed in', async () => {
     render(<MockLogin />)
     const username = screen.getByText('Username')
     expect(username).toBeInTheDocument()
@@ -25,7 +25,7 @@ describe('Login info present and useable', () => {
     expect(input.value).toBe('foo')
   })
 
-  test('should render the text stating the password and can be typed in', async () => {
+  it('should render the text stating the password and can be typed in', async () => {
     render(<MockLogin />)
     const password = screen.getByText('Password')
     expect(password).toBeInTheDocument()

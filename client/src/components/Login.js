@@ -26,7 +26,7 @@ const StyledButton = styled(Button)(({ theme }) => ({
   },
 }))
 
-export default function Login() {
+export default function Login(props) {
   let navigate = useNavigate()
 
   const [loginData, setLoginData] = useState({
@@ -65,7 +65,7 @@ export default function Login() {
 
   return (
     <>
-      <NavTopBar />
+      <NavTopBar testing={props.testing} />
       <Stack
         direction='row'
         alignItems='center'

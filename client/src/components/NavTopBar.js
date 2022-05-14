@@ -17,7 +17,7 @@ const LinkStyled = styled(Link)(({ theme }) => ({
   },
 }))
 
-export const NavTopBar = () => {
+export const NavTopBar = (props) => {
   let navigate = useNavigate()
   const [login, setLogin] = useState(null)
 
@@ -35,7 +35,9 @@ export const NavTopBar = () => {
       }
     }
 
-    getLoginData()
+    if (!props.testing) {
+      getLoginData()
+    }
   }, [])
 
   function handleClick(e) {

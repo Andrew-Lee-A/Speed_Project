@@ -9,14 +9,14 @@ const MockSignUp = () => {
   return (
     <ThemeProvider theme={colorTheme}>
       <BrowserRouter>
-        <SignUp />
+        <SignUp testing={true} />
       </BrowserRouter>
     </ThemeProvider>
   )
 }
 
 describe('Signup info present and useable', () => {
-  test('should render text stating username and can be typed in', async () => {
+  it('should render text stating username and can be typed in', async () => {
     render(<MockSignUp />)
     const username = screen.getByText('Username')
     expect(username).toBeInTheDocument()
@@ -25,7 +25,7 @@ describe('Signup info present and useable', () => {
     expect(input.value).toBe('foo')
   })
 
-  test('should render the text stating the password and can be typed in', async () => {
+  it('should render the text stating the password and can be typed in', async () => {
     render(<MockSignUp />)
     const password = screen.getByText('Password')
     expect(password).toBeInTheDocument()
@@ -34,7 +34,7 @@ describe('Signup info present and useable', () => {
     expect(input.value).toBe('bar')
   })
 
-  test('should render the text stating to confirm password and can be typed in', async () => {
+  it('should render the text stating to confirm password and can be typed in', async () => {
     render(<MockSignUp />)
     const confirmedPassword = screen.getByText('Confirm Password')
     expect(confirmedPassword).toBeInTheDocument()
