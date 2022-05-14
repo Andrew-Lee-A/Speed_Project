@@ -94,6 +94,7 @@ export default function Login() {
             label='Username'
             name='username'
             value={loginData.username}
+            inputProps={{ 'data-testid': 'username-input' }}
           />
           <StyledTextField
             component={Paper}
@@ -103,6 +104,7 @@ export default function Login() {
             name='password'
             type='password'
             value={loginData.password}
+            inputProps={{ 'data-testid': 'password-input' }}
           />
           <StyledTextField
             component={Paper}
@@ -112,6 +114,7 @@ export default function Login() {
             name='passwordConfirmation'
             type='password'
             value={loginData.passwordConfirmation}
+            inputProps={{ 'data-testid': 'confirm-password-input' }}
           />
           <StyledButton onClick={handleClick} variant='contained'>
             Sign Up

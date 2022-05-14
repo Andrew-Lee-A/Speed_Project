@@ -86,8 +86,10 @@ export default function Login() {
             label='Username'
             name='username'
             value={loginData.username}
+            inputProps={{ 'data-testid': 'username-input' }}
           />
           <StyledTextField
+            disabled
             component={Paper}
             onChange={handleChange}
             required
@@ -95,6 +97,7 @@ export default function Login() {
             name='password'
             type='password'
             value={loginData.password}
+            inputProps={{ 'data-testid': 'password-input' }}
           />
           <StyledButton onClick={handleClick} variant='contained'>
             Login
