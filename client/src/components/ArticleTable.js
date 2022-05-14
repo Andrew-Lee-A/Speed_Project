@@ -168,7 +168,7 @@ export const ArticleTable = () => {
         sx={{color: 'white'}}
           control={
             <AdvancedFilter
-      
+
             />
           }
         />
@@ -199,51 +199,55 @@ export const ArticleTable = () => {
                   Authors
                 </StyledLabel>
               </TableCellVariant>
-              <TableCellVariant>
-                <TableSortLabel>
+              <TableCellVariant
+              id='source'
+              sortDirection = {orderBy === 'source' ? order:false}>
+                <StyledLabel
+                active = {orderBy === 'source'}
+                direction = {orderBy === 'source' ? order : 'asc'}
+                onClick={ () => {handleSortRequest('source')}}>
                   Source
-                </TableSortLabel>
+                </StyledLabel>
                 </TableCellVariant>
-              <TableCellVariant>
-                <TableSortLabel>
+              <TableCellVariant
+              id='pubYear'
+              sortDirection = {orderBy === 'pubYear' ? order:false}>
+                <StyledLabel
+                active = {orderBy === 'pubYear'}
+                direction = {orderBy === 'pubYear' ? order : 'asc'}
+                onClick={ () => {handleSortRequest('pubYear')}}>
                   Year Published
-                </TableSortLabel>
+                </StyledLabel>
               </TableCellVariant>
               <TableCellVariant
                 id='doi'
                 sortDirection = {orderBy === 'doi' ? order:false}>
-                <TableSortLabel
-                  sx = {
-                    {
-                        '&.MuiTableSortLabel-root': {
-                            color: 'white',
-                        },
-                        '&.MuiTableSortLabel-root:hover': {
-                            color: '#29D6B5',
-                        },
-                        '&.Mui-active': {
-                            color: '#29D6B5',
-                        },
-                        '& .MuiTableSortLabel-icon': {
-                            color: '#29D6B5!important',
-                        },
-                    }
-                }
+                <StyledLabel
                   active = {orderBy === 'doi'}
                   direction = {orderBy === 'doi' ? order : 'asc'}
                   onClick={ () => {handleSortRequest('doi')}}>
                   DOI
-                </TableSortLabel>
+                </StyledLabel>
               </TableCellVariant>
-              <TableCellVariant>
-                <TableSortLabel>
+              <TableCellVariant
+              id='claimedBenefit'
+              sortDirection = {orderBy === 'claimedBenefit' ? order:false}>
+                <StyledLabel
+                active = {orderBy === 'claimedBenefit'}
+                direction = {orderBy === 'claimedBenefit' ? order : 'asc'}
+                onClick={ () => {handleSortRequest('claimedBenefit')}}>
                   Claimed Benefit
-                </TableSortLabel>
+                </StyledLabel>
               </TableCellVariant>
-              <TableCellVariant>
-                <TableSortLabel>
+              <TableCellVariant
+              id='levelOfEvidence'
+              sortDirection = {orderBy === 'levelOfEvidence' ? order:false}>
+                <StyledLabel
+                active = {orderBy === 'levelOfEvidence'}
+                direction = {orderBy === 'levelOfEvidence' ? order : 'asc'}
+                onClick={ () => {handleSortRequest('levelOfEvidence')}}>
                   Level of Evidence
-                </TableSortLabel>
+                </StyledLabel>
               </TableCellVariant>
               <TableCellVariant>
                 
