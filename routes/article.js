@@ -1,5 +1,4 @@
 const express = require('express')
-const { route } = require('express/lib/router')
 const router = express.Router()
 
 const {

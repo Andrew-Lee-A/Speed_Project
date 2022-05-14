@@ -10,6 +10,7 @@ const cors = require('cors')
 
 const articleRouter = require('./routes/article')
 const authRouter = require('./routes/authentication')
+const userInfoRouter = require('./routes/userInfo')
 
 // general middleware
 app.use(express.json())
@@ -21,8 +22,11 @@ app.get('/api', (req, res) => {
   res.json({ users: ['userOne', 'userTwo', 'userThree'] })
 })
 
+const authMiddleware = require('./middleware/authMiddleware')
+
 app.use('/api/v1/article', articleRouter)
 app.use('/api/v1/auth', authRouter)
+app.use('/api/v1/userinfo', authMiddleware, userInfoRouter)
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, './client/build')))
