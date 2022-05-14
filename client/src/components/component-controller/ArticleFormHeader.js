@@ -16,8 +16,8 @@ const cardStyled = styled(Card)(({theme}) =>({
     },
 }))
 
-const TypographyTitle = styled(Typography)(({ theme }) => ({
-    paddingLeft:theme.spacing(4),
+const TypographyTitle = styled('div')(({ theme }) => ({
+paddingLeft:theme.spacing(4),
     '& .MuiTypography-subtitle2':{
         opacity:'0.6'
     },
@@ -40,12 +40,14 @@ export default function PageHeader(props){
                 <Card>
                     {icon}
                 </Card>
-                <TypographyTitle variant ='h6' component='div'>
-                    {title}
+                <TypographyTitle>
+                    <Typography variant ='h6' component='div'>
+                        {title}
+                    </Typography>
+                    <Typography variant='subtitle2' component='div'>
+                        {subTitle}
+                    </Typography>
                 </TypographyTitle>
-                <Typography variant='subtitle2' component='div'>
-                    {subTitle}
-                </Typography>
             </HeaderDivStyled>
         </paperStyled>
     )
