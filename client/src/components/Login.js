@@ -89,7 +89,6 @@ export default function Login(props) {
             inputProps={{ 'data-testid': 'username-input' }}
           />
           <StyledTextField
-            disabled
             component={Paper}
             onChange={handleChange}
             required

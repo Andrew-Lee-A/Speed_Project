@@ -38,7 +38,8 @@ export const NavTopBar = (props) => {
     if (!props.testing) {
       getLoginData()
     }
-  }, [])
+    console.log('hi mom')
+  }, [props.testing])
 
   function handleClick(e) {
     const { name } = e.target
