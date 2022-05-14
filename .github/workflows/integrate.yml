@@ -13,7 +13,6 @@ jobs:
         with:
           node-version: 16
       - run: npm ci
-      - run: npm test
   test_build_frontend_pull_request:
     runs-on: ubuntu-latest
     defaults:
@@ -25,4 +24,5 @@ jobs:
         with:
           node-version: 16
       - run: npm ci
+      - run: npm test
       - run: npm run build
