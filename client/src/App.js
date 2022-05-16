@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { ArticleTable } from './components/ArticleTable'
-import ArticleFormHeader from './components/component-controller/ArticleFormHeader'
+import ArticleForm from './components/component-controller/ArticleForm'
 import './stylesheet.css'
 import { ThemeProvider } from '@emotion/react'
 import colorTheme from './theme'
 import ArticleIcon from '@mui/icons-material/Article';
+import PageHeader from'./components/component-controller/header'
 
 function App() {
   const [backendData, setBackendData] = useState([{}])
@@ -35,12 +36,14 @@ function App() {
   return (
     <div>
       <ThemeProvider theme={colorTheme}>
-      <ArticleFormHeader
-                title='Article'
-                subTitle='Welcome User - Submit Article'
+      <PageHeader
+                title='Submit Article'
+                subTitle='Logged in as: Rhys Van Rooyen'
                 icon={<ArticleIcon fontSize='large'/>}
         />
-        <ArticleTable />
+      
+      <ArticleForm/>
+
       </ThemeProvider>
     </div>
   )

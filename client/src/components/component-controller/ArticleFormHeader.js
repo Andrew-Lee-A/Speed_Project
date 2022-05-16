@@ -7,12 +7,13 @@ const paperStyled = styled(Paper)(({theme}) =>({
     },
 }))
 
+
 const cardStyled = styled(Card)(({theme}) =>({
     display:'inline-block',
     padding:theme.spacing(2),
     color:'#3c44b1',
     '& .MuiCard-root .MuiSVGIcon-root':{
-        color: 'white'
+        color: 'blue'
     },
 }))
 
@@ -20,6 +21,9 @@ const TypographyTitle = styled('div')(({ theme }) => ({
 paddingLeft:theme.spacing(4),
     '& .MuiTypography-subtitle2':{
         opacity:'0.6'
+    },
+    '& .MuiCard-root .MuiSVGIcon-root':{
+        color: 'blue'
     },
 
 }))
@@ -35,7 +39,9 @@ export default function PageHeader(props){
     const {title, subTitle, icon} = props
 
     return (
-        <paperStyled elevation={0} square>
+        <paperStyled elevation={1} square
+        sx = {{backgroundColor: 'red',
+        }}>
             <HeaderDivStyled>
                 <Card>
                     {icon}
