@@ -15,14 +15,11 @@ import {
   tableCellClasses,
   InputAdornment,
   styled,
-  FormControl,
-  FormControlLabel,
 } from '@mui/material'
 import theme from '../theme'
 import Input from './component-controller/Input.js'
 import { Search } from '@mui/icons-material';
-import AdvancedFilter from './component-controller/AdvancedFilter.js'
-
+import ComboBox from './component-controller/ComboBox';
 const ROWS_PER_PAGE = 5
 
 const TableCellVariant = styled(TableCell)(({ theme }) => ({
@@ -148,6 +145,29 @@ export const ArticleTable = () => {
     })
 }
 
+const filterHandleSearch = (e, pubYear)  => {
+  let target = e.target.value;
+  console.log(target.value);
+  console.log(e.target.value);
+ 
+  
+  
+  setFilterFn({
+      fn: items => {
+          if (target.value === "")
+              return items;
+          else
+          if(pubYear === ""){
+            return items.filter(x => x.title.toString().toLowerCase().includes(target.value.toLowerCase()));
+          }else{
+            return (items.filter(x => (x.pubYear.toString().toLowerCase() === (pubYear)) && (x.title.toString().toLowerCase().includes(target.value.toLowerCase()))));
+          }
+             
+      }
+  })
+}
+
+
   return (
     <>
       <Toolbar>
@@ -163,16 +183,12 @@ export const ArticleTable = () => {
         onChange = {handleSearch}
         />
 
-        <FormControlLabel
-        label="Advanced Search"
-        sx={{color: 'white'}}
-          control={
-            <AdvancedFilter
+      <ComboBox
 
-            />
-          }
-        />
+        onChange = {filterHandleSearch}
 
+
+      />
       
       </Toolbar>    
       <TableContainer>
@@ -199,55 +215,51 @@ export const ArticleTable = () => {
                   Authors
                 </StyledLabel>
               </TableCellVariant>
-              <TableCellVariant
-              id='source'
-              sortDirection = {orderBy === 'source' ? order:false}>
-                <StyledLabel
-                active = {orderBy === 'source'}
-                direction = {orderBy === 'source' ? order : 'asc'}
-                onClick={ () => {handleSortRequest('source')}}>
+              <TableCellVariant> 
+                <TableSortLabel>
                   Source
-                </StyledLabel>
+                </TableSortLabel>
                 </TableCellVariant>
-              <TableCellVariant
-              id='pubYear'
-              sortDirection = {orderBy === 'pubYear' ? order:false}>
-                <StyledLabel
-                active = {orderBy === 'pubYear'}
-                direction = {orderBy === 'pubYear' ? order : 'asc'}
-                onClick={ () => {handleSortRequest('pubYear')}}>
+              <TableCellVariant>
+                <TableSortLabel>
                   Year Published
-                </StyledLabel>
+                </TableSortLabel>
               </TableCellVariant>
               <TableCellVariant
                 id='doi'
                 sortDirection = {orderBy === 'doi' ? order:false}>
-                <StyledLabel
+                <TableSortLabel
+                  sx = {
+                    {
+                        '&.MuiTableSortLabel-root': {
+                            color: 'white',
+                        },
+                        '&.MuiTableSortLabel-root:hover': {
+                            color: '#29D6B5',
+                        },
+                        '&.Mui-active': {
+                            color: '#29D6B5',
+                        },
+                        '& .MuiTableSortLabel-icon': {
+                            color: '#29D6B5!important',
+                        },
+                    }
+                }
                   active = {orderBy === 'doi'}
                   direction = {orderBy === 'doi' ? order : 'asc'}
                   onClick={ () => {handleSortRequest('doi')}}>
                   DOI
-                </StyledLabel>
+                </TableSortLabel>
               </TableCellVariant>
-              <TableCellVariant
-              id='claimedBenefit'
-              sortDirection = {orderBy === 'claimedBenefit' ? order:false}>
-                <StyledLabel
-                active = {orderBy === 'claimedBenefit'}
-                direction = {orderBy === 'claimedBenefit' ? order : 'asc'}
-                onClick={ () => {handleSortRequest('claimedBenefit')}}>
+              <TableCellVariant>
+                <TableSortLabel>
                   Claimed Benefit
-                </StyledLabel>
+                </TableSortLabel>
               </TableCellVariant>
-              <TableCellVariant
-              id='levelOfEvidence'
-              sortDirection = {orderBy === 'levelOfEvidence' ? order:false}>
-                <StyledLabel
-                active = {orderBy === 'levelOfEvidence'}
-                direction = {orderBy === 'levelOfEvidence' ? order : 'asc'}
-                onClick={ () => {handleSortRequest('levelOfEvidence')}}>
+              <TableCellVariant>
+                <TableSortLabel>
                   Level of Evidence
-                </StyledLabel>
+                </TableSortLabel>
               </TableCellVariant>
               <TableCellVariant>
                 
