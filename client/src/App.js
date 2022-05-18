@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { ArticleTable } from './components/ArticleTable'
-import ArticleForm from './components/component-controller/ArticleForm'
+import ArticleForm from './components/ArticleForm'
 import './stylesheet.css'
 import { ThemeProvider } from '@emotion/react'
 import colorTheme from './theme'
