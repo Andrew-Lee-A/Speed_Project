@@ -30,7 +30,6 @@ export const NavTopBar = (props) => {
               Authorization: 'Bearer ' + localStorage.getItem('JWT'),
             },
           })
-          console.log(data)
           setLogin(data)
         } catch (e) {
           console.log(e)
