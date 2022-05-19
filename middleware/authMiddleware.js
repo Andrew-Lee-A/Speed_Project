@@ -18,10 +18,7 @@ const auth = async (req, res, next) => {
     }
     next()
   } catch (e) {
-    req.user = {
-      error: 'not authorized',
-    }
-    next()
+    throw new Error('Not Authorized')
   }
 }
 
