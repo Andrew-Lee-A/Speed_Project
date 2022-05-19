@@ -62,6 +62,7 @@ export default function Login(props) {
           password: '',
           passwordConfirmation: '',
         })
+        props.setAccount(true)
         navigate('/')
       } else {
         throw new Error('Passwords do not match')
