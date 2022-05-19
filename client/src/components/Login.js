@@ -57,6 +57,7 @@ export default function Login(props) {
         password: '',
       })
 
+      props.setAccount(true)
       navigate('/')
     } catch (e) {
       console.log(e)

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { ArticleTable } from './components/ArticleTable'
 import Home from './components/Home'
@@ -8,15 +9,40 @@ import { ThemeProvider } from '@emotion/react'
 import colorTheme from './theme'
 
 function App() {
+  const [account, setAccount] = useState(false)
+
   return (
     <ThemeProvider theme={colorTheme}>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Home />} />
+          <Route
+            path='/'
+            element={
+              <Home testing={false} account={account} setAccount={setAccount} />
+            }
+          />
           <Route path='/articles' element={<ArticleTable />} />
           <Route path='/addarticle' />
-          <Route path='/login' element={<Login />} />
-          <Route path='/signup' element={<SignUp />} />
+          <Route
+            path='/login'
+            element={
+              <Login
+                testing={false}
+                account={account}
+                setAccount={setAccount}
+              />
+            }
+          />
+          <Route
+            path='/signup'
+            element={
+              <SignUp
+                testing={false}
+                account={account}
+                setAccount={setAccount}
+              />
+            }
+          />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

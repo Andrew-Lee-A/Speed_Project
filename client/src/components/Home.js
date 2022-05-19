@@ -8,10 +8,10 @@ const Text = styled(Typography)(({ theme }) => ({
   backgroundColor: '',
 }))
 
-export default function Home() {
+export default function Home(props) {
   return (
     <>
-      <NavTopBar />
+      <NavTopBar account={props.account} />
       <Stack
         direction='row'
         justifyContent='space-evenly'
