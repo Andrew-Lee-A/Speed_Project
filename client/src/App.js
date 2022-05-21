@@ -7,6 +7,8 @@ import SignUp from './components/SignUp'
 import './stylesheet.css'
 import { ThemeProvider } from '@emotion/react'
 import colorTheme from './theme'
+import ArticleIcon from '@mui/icons-material/Article';
+import PageHeader from'./components/component-controller/header'
 
 function App() {
   const [account, setAccount] = useState(false)
