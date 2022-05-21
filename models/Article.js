@@ -29,6 +29,13 @@ const ArticleSchema = mongoose.Schema({
     type: String,
     require: [true, 'Level of evidence not provided'],
   },
+  recommended: {
+    type: Boolean,
+  },
+})
+
+ArticleSchema.pre('save', async function () {
+  this.recommended = false
 })
 
 module.exports = mongoose.model('Article', ArticleSchema)

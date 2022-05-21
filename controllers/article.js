@@ -1,19 +1,21 @@
-const {StatusCodes} = require('http-status-codes')
+const Article = require('../models/Article')
+const { StatusCodes } = require('http-status-codes')
 
 const getAllArticles = async (req, res) => {
-    res.status(StatusCodes.OK).json({msg: 'get all articles'})
+  res.status(StatusCodes.OK).json({ msg: 'get all articles' })
 }
 
 const getArticle = async (req, res) => {
-    res.status(StatusCodes.OK).json({msg: 'get a single article'})
+  res.status(StatusCodes.OK).json({ msg: 'get a single article' })
 }
 
 const addArticle = async (req, res) => {
-    res.status(StatusCodes.OK).json({msg: 'add a single article'})
+  const article = await Article.create(req.body)
+  res.status(StatusCodes.OK).json(article)
 }
 
 module.exports = {
-    getAllArticles,
-    getArticle,
-    addArticle
+  getAllArticles,
+  getArticle,
+  addArticle,
 }
