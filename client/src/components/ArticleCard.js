@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
   Stack,
   Paper,
@@ -8,6 +9,7 @@ import {
 } from '@mui/material'
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd'
 import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded'
+import axios from 'axios'
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
   color: 'white',
@@ -20,12 +22,30 @@ const StyledButton = styled(Button)(({ theme }) => ({
 }))
 
 export default function ArticleCard(props) {
+  const [recommended, setRecommended] = useState('')
+
+  async function handleAccept() {
+    axios.post()
+  }
+
+  async function handleReject() {
+    axios.post()
+  }
+
   return (
     <StyledPaper>
       <Checkbox
         icon={<BookmarkAddIcon sx={{ color: 'white' }} />}
         checkedIcon={<BookmarkAddedIcon sx={{ color: '#36c997' }} />}
         sx={{ float: 'right' }}
+        value={recommended}
+        onChange={() => {
+          if (recommended === 'ticked') {
+            setRecommended('')
+          } else {
+            setRecommended('ticked')
+          }
+        }}
       ></Checkbox>
       <Stack direction='column' alignItems='center' gap='0.2rem'>
         <Typography>{props.title}</Typography>

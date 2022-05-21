@@ -34,10 +34,11 @@ export default function ModeratorArticleList() {
           justifyContent='flex-start'
           alignItems='center'
         >
-          {pendingArticles.map((article, index) => {
+          {pendingArticles.map((article) => {
             return (
               <ArticleCard
-                key={index}
+                key={article._id}
+                id={article._id}
                 title={article.title}
                 doi={article.doi}
                 authors={article.authors}
