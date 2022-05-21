@@ -46,15 +46,15 @@ export default function ArticleForm() {
   const { gilad, jason, antoine } = state
 
   const handleInputChange = (e) => {
-    const [name, value] = e.target
+    const { name, value } = e.target
     setValues({
       ...values,
       [name]: value,
     })
   }
 
-  function handleSubmit() {
-    console.log('submitted')
+  async function handleSubmit() {
+    await axios.post('/api/v1/article', values)
   }
 
   return (
@@ -70,9 +70,9 @@ export default function ArticleForm() {
         },
       }}
     >
-      <FormGroup onSubmit={handleSubmit}>
-        <Grid container>
-          <Grid item xs={6} direction='column'>
+      <FormGroup>
+        <Grid container direction='column'>
+          <Grid item xs={6}>
             <Controls.Input
               variant='outlined'
               label='Title'
@@ -83,18 +83,21 @@ export default function ArticleForm() {
             <Controls.Input
               variant='outlined'
               label='Authors'
+              name='authors'
               values={values.authors}
               onChange={handleInputChange}
             />
             <Controls.Input
               variant='outlined'
               label='Source'
-              values={values.authors}
+              name='source'
+              values={values.source}
               onChange={handleInputChange}
             />
             <Controls.Input
               variant='outlined'
               label='Publication Year'
+              name='pubYear'
               values={values.pubYear}
               onChange={handleInputChange}
             />
@@ -110,18 +113,24 @@ export default function ArticleForm() {
             <Controls.Input
               variant='outlined'
               label='Claimed Benefits'
+              name='claimedBenefit'
               values={values.claimedBenefit}
               onChange={handleInputChange}
             />
             <Controls.Input
               variant='outlined'
               label='Level Of Evidence'
+              name='levelOfEvidence'
               values={values.levelOfEvidence}
               onChange={handleInputChange}
             />
           </Grid>
           <Grid item>
-            <Controls.Button type='sumit' text='submit'></Controls.Button>
+            <Controls.Button
+              onClick={handleSubmit}
+              type='sumit'
+              text='submit'
+            ></Controls.Button>
           </Grid>
         </Grid>
       </FormGroup>
