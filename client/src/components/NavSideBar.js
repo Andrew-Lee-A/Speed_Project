@@ -28,6 +28,7 @@ export const NavSideBar = () => {
         navigate('/articles')
         break
       case 'create':
+        navigate('/createarticle')
         break
       default:
     }
