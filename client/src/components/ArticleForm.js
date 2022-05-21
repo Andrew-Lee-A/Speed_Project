@@ -105,8 +105,11 @@ export default function ArticleForm() {
                 onChange={handleInputChange}
               />
             </Grid>
-            <Grid>
-
+            <Grid item>
+              <Controls.Button
+                type="sumit"
+                text="submit">
+              </Controls.Button>
             </Grid>
           </Grid>
         </FormGroup>
