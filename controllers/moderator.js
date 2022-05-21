@@ -7,36 +7,48 @@ const getAllPendingArticles = async (req, res) => {
 }
 
 const acceptArticle = async (req, res) => {
-  const { id } = req.params
-  const { recommended } = req.body
+  const { permission } = req.user
 
-  const article = await Article.findByIdAndUpdate(
-    id,
-    {
-      recommended: recommended,
-      status: 'accepted',
-    },
-    { new: true, runValidators: true }
-  )
+  if (permission === 'moderator') {
+    const { id } = req.params
+    const { recommended } = req.body
 
-  if (!article) {
-    res.status(StatusCodes.NOT_FOUND).json({ msg: 'no matching article' })
-    return
+    const article = await Article.findByIdAndUpdate(
+      id,
+      {
+        recommended: recommended,
+        status: 'accepted',
+      },
+      { new: true, runValidators: true }
+    )
+
+    if (!article) {
+      res.status(StatusCodes.NOT_FOUND).json({ msg: 'no matching article' })
+      return
+    }
+
+    res.status(StatusCodes.OK).json({ article })
+  } else {
+    res.status(StatusCodes.UNAUTHORIZED).json({ msg: 'Invalid permissions' })
   }
-
-  res.status(StatusCodes.OK).json({ article })
 }
 
 const rejectArticle = async (req, res) => {
-  const { id } = req.params
-  const article = await Article.findByIdAndDelete(id)
+  const { permission } = req.user
 
-  if (!article) {
-    res.status(StatusCodes.NOT_FOUND).json({ msg: 'no matching article' })
-    return
+  if (permission === 'moderator') {
+    const { id } = req.params
+    const article = await Article.findByIdAndDelete(id)
+
+    if (!article) {
+      res.status(StatusCodes.NOT_FOUND).json({ msg: 'no matching article' })
+      return
+    }
+
+    res.status(StatusCodes.OK).json({ article })
+  } else {
+    res.status(StatusCodes.UNAUTHORIZED).json({ msg: 'Invalid permissions' })
   }
-
-  res.status(StatusCodes.OK).json({ article })
 }
 
 module.exports = { getAllPendingArticles, acceptArticle, rejectArticle }

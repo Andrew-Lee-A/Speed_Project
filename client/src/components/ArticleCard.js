@@ -30,13 +30,29 @@ export default function ArticleCard(props) {
       status: 'accepted',
     }
 
-    await axios.post(`/api/v1/moderator/accept/${props.id}`, reqBody)
-    props.reRender()
+    try {
+      await axios.post(`/api/v1/moderator/accept/${props.id}`, reqBody, {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('JWT'),
+        },
+      })
+      props.reRender()
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   async function handleReject() {
-    await axios.post(`/api/v1/moderator/reject/${props.id}`)
-    props.reRender()
+    try {
+      await axios.post(`/api/v1/moderator/reject/${props.id}`, null, {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('JWT'),
+        },
+      })
+      props.reRender()
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   return (

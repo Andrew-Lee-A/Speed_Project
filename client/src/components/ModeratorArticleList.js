@@ -11,9 +11,17 @@ export default function ModeratorArticleList() {
 
   useEffect(() => {
     async function getPendingArtilces() {
-      const res = await axios.get('/api/v1/moderator')
-      const data = res.data.pendingArticles
-      setPendingArticles(data)
+      try {
+        const res = await axios.get('/api/v1/moderator', {
+          headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('JWT'),
+          },
+        })
+        const data = res.data.pendingArticles
+        setPendingArticles(data)
+      } catch (e) {
+        console.log(e)
+      }
     }
 
     getPendingArtilces()
