@@ -1,19 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState}  from 'react'
 import {
   Paper,
-  TextField,
   Grid,
-  styled,
-  FormControl,
-  FormHelperText,
   FormGroup,
-  Select,
-  MenuItem,
-  FormLabel,
-  FormControlLabel,
-  Checkbox,
 } from '@mui/material'
-import Input from './component-controller/Input'
 import Controls from './component-controller/Controls'
 import axios from 'axios'
 
