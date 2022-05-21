@@ -3,15 +3,17 @@ import { NavTopBar } from './NavTopBar'
 import { NavSideBar } from './NavSideBar'
 import ArticleCard from './ArticleCard'
 import { Stack, Paper, TextField, Button, styled } from '@mui/material'
+import axios from 'axios'
 
 export default function ModeratorArticleList() {
-  const [pendingArticles, setPendingArticles] = useState([
-    { title: 'title', doi: 'doi', authors: 'author' },
-    { title: 'title', doi: 'doi', authors: 'author' },
-  ])
+  const [pendingArticles, setPendingArticles] = useState([])
 
   useEffect(() => {
-    async function getPendingArtilces() {}
+    async function getPendingArtilces() {
+      const res = await axios.get('/api/v1/moderator')
+      const data = res.data.pendingArticles
+      setPendingArticles(data)
+    }
 
     getPendingArtilces()
   }, [])
