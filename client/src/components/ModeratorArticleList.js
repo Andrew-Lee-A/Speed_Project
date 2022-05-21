@@ -2,11 +2,12 @@ import { useState, useEffect } from 'react'
 import { NavTopBar } from './NavTopBar'
 import { NavSideBar } from './NavSideBar'
 import ArticleCard from './ArticleCard'
-import { Stack, Paper, TextField, Button, styled } from '@mui/material'
+import { Stack } from '@mui/material'
 import axios from 'axios'
 
 export default function ModeratorArticleList() {
   const [pendingArticles, setPendingArticles] = useState([])
+  const [reqestArticles, setRequestArticles] = useState(true)
 
   useEffect(() => {
     async function getPendingArtilces() {
@@ -16,7 +17,15 @@ export default function ModeratorArticleList() {
     }
 
     getPendingArtilces()
-  }, [])
+  }, [reqestArticles])
+
+  function toggleRequestArticles() {
+    if (reqestArticles) {
+      setRequestArticles(false)
+    } else {
+      setRequestArticles(true)
+    }
+  }
 
   return (
     <>
@@ -42,6 +51,7 @@ export default function ModeratorArticleList() {
                 title={article.title}
                 doi={article.doi}
                 authors={article.authors}
+                reRender={toggleRequestArticles}
               />
             )
           })}

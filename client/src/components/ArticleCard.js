@@ -25,11 +25,18 @@ export default function ArticleCard(props) {
   const [recommended, setRecommended] = useState('')
 
   async function handleAccept() {
-    axios.post()
+    const reqBody = {
+      recommended: recommended === 'ticked',
+      status: 'accepted',
+    }
+
+    await axios.post(`/api/v1/moderator/accept/${props.id}`, reqBody)
+    props.reRender()
   }
 
   async function handleReject() {
-    axios.post()
+    await axios.post(`/api/v1/moderator/reject/${props.id}`)
+    props.reRender()
   }
 
   return (
@@ -53,10 +60,18 @@ export default function ArticleCard(props) {
         <Typography>AUTHORS: {props.authors}</Typography>
       </Stack>
       <Stack direction='row' gap='0.5rem'>
-        <StyledButton variant='contained' sx={{ backgroundColor: '#36c997' }}>
+        <StyledButton
+          onClick={handleAccept}
+          variant='contained'
+          sx={{ backgroundColor: '#36c997' }}
+        >
           Approve
         </StyledButton>
-        <StyledButton variant='contained' sx={{ backgroundColor: '#D82746' }}>
+        <StyledButton
+          onClick={handleReject}
+          variant='contained'
+          sx={{ backgroundColor: '#D82746' }}
+        >
           Reject
         </StyledButton>
       </Stack>
