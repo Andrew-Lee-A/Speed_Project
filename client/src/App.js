@@ -4,6 +4,7 @@ import { ArticleTable } from './components/ArticleTable'
 import Home from './components/Home'
 import Login from './components/Login'
 import SignUp from './components/SignUp'
+import ArticleForm from './components/ArticleForm'
 import './stylesheet.css'
 import { ThemeProvider } from '@emotion/react'
 import colorTheme from './theme'
@@ -43,6 +44,7 @@ function App() {
               />
             }
           />
+          <Route path='/createarticle' element={<ArticleForm />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
