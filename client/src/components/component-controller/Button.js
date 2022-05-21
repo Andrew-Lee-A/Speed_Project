@@ -24,6 +24,9 @@ export default function MuiButton(props) {
                 },
                 '&.MuiButton-root label':{
                     textTransform: 'none',
+                },
+                '&:hover':{
+                    color: '#29D6B5',
                 }
             }}
             variant={variant || "contained"}
