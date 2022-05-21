@@ -23,17 +23,15 @@ export const NavTopBar = (props) => {
 
   useEffect(() => {
     async function getLoginData() {
-      if (props.account) {
-        try {
-          const { data } = await axios.get('/api/v1/userinfo', {
-            headers: {
-              Authorization: 'Bearer ' + localStorage.getItem('JWT'),
-            },
-          })
-          setLogin(data)
-        } catch (e) {
-          console.log(e)
-        }
+      try {
+        const { data } = await axios.get('/api/v1/userinfo', {
+          headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('JWT'),
+          },
+        })
+        setLogin(data)
+      } catch (e) {
+        console.log(e)
       }
     }
 
