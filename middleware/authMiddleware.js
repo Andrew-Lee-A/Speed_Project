@@ -3,6 +3,9 @@ const { StatusCodes } = require('http-status-codes')
 
 const auth = async (req, res, next) => {
   const authHead = req.headers.authorization
+  console.log(req.headers)
+  console.log(authHead)
+  console.log(req.body)
   if (!authHead || !authHead.startsWith('Bearer ')) {
     throw new Error()
   }

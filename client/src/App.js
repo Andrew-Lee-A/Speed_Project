@@ -4,6 +4,7 @@ import { ArticleTable } from './components/ArticleTable'
 import Home from './components/Home'
 import Login from './components/Login'
 import SignUp from './components/SignUp'
+import ModeratorArticleList from './components/ModeratorArticleList'
 import ArticleForm from './components/ArticleForm'
 import './stylesheet.css'
 import { ThemeProvider } from '@emotion/react'
@@ -44,6 +45,8 @@ function App() {
               />
             }
           />
+          <Route path='/moderate' element={<ModeratorArticleList />}></Route>
+
           <Route path='/createarticle' element={<ArticleForm />} />
         </Routes>
       </BrowserRouter>
