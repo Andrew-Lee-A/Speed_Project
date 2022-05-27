@@ -3,7 +3,7 @@ const { StatusCodes } = require('http-status-codes')
 
 const getAllArticles = async (req, res) => {
   const articles = await Article.find({ status: 'accepted' })
-  res.status(StatusCodes.OK).json({ articles })
+  res.status(StatusCodes.OK).json(articles)
 }
 
 const getArticle = async (req, res) => {
