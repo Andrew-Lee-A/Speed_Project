@@ -10,7 +10,6 @@ import {
   TablePagination,
   TableSortLabel,
   Toolbar,
-  Button,
   Paper,
   tableCellClasses,
   InputAdornment,
@@ -42,10 +41,6 @@ const TableCellVariant = styled(TableCell)(({ theme }) => ({
 
 const TablePaginationVariant = styled(TablePagination)(({ theme }) => ({
   backgroundColor: theme.palette.secondary.main,
-  color: theme.palette.common.white,
-}))
-
-const TableBtn = styled(Button)(({ theme }) => ({
   color: theme.palette.common.white,
 }))
 
@@ -119,10 +114,6 @@ export const ArticleTable = () => {
 
   const handleNextPage = (e, page) => {
     setCurrentPage(page)
-  }
-
-  const handleArticleClicked = (e) => {
-    console.log(e.target.value)
   }
 
   const handleSearch = (e) => {
