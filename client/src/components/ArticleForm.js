@@ -18,21 +18,6 @@ const initialFormValues = {
 export default function ArticleForm() {
   const [values, setValues] = useState(initialFormValues)
 
-  const [state, setState] = useState({
-    TDD: false,
-    SELF_LEARNING: false,
-    OOP: false,
-  })
-
-  const handleChange = (event) => {
-    setState({
-      ...state,
-      [event.target.name]: event.target.checked,
-    })
-  }
-
-  const { gilad, jason, antoine } = state
-
   const handleInputChange = (e) => {
     const { name, value } = e.target
     setValues({
