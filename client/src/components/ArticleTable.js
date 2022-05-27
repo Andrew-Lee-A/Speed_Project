@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   Table,
   TableContainer,
@@ -19,8 +19,10 @@ import {
 } from '@mui/material'
 import theme from '../theme'
 import Input from './component-controller/Input.js'
+import StarIcon from '@mui/icons-material/Star'
 import { Search } from '@mui/icons-material'
 import AdvancedFilter from './component-controller/AdvancedFilter.js'
+import axios from 'axios'
 
 const ROWS_PER_PAGE = 5
 
@@ -56,6 +58,7 @@ const StyledLabel = styled(TableSortLabel)(({ theme }) => ({
 
 export const ArticleTable = () => {
   const [currentPage, setCurrentPage] = useState(0)
+  const [articles, setArticles] = useState([])
 
   //sorting const
   const [order, setOrder] = useState()
@@ -68,23 +71,14 @@ export const ArticleTable = () => {
     },
   })
 
-  // fetch all articles from db
-  function getData() {
-    const arr = []
-    for (let i = 0; i < 20; i++) {
-      arr[i] = {
-        title: "Bob's Burgers",
-        authors: 'bob',
-        source: 'burger land',
-        pubYear: '2022',
-        doi: i,
-        claimedBenefit: 'makes you code using less food',
-        levelOfEvidence: 'strong support',
-      }
+  useEffect(() => {
+    async function getArticles() {
+      const { data } = await axios('/api/v1/article')
+      setArticles(data)
     }
 
-    return arr
-  }
+    getArticles()
+  }, []) // on mount
 
   //sort function
   function stableSort(array, comparator) {
@@ -122,8 +116,6 @@ export const ArticleTable = () => {
     setOrder(isAsc ? 'desc' : 'asc')
     setOrderBy(cell_ID)
   }
-
-  const data = getData()
 
   const handleNextPage = (e, page) => {
     setCurrentPage(page)
@@ -278,7 +270,7 @@ export const ArticleTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {stableSort(filterFn.fn(data), getComparator(order, orderBy))
+            {stableSort(filterFn.fn(articles), getComparator(order, orderBy))
               .slice(
                 currentPage * ROWS_PER_PAGE,
                 currentPage * ROWS_PER_PAGE + ROWS_PER_PAGE
@@ -294,9 +286,11 @@ export const ArticleTable = () => {
                     <TableCellVariant>{item.claimedBenefit}</TableCellVariant>
                     <TableCellVariant>{item.levelOfEvidence}</TableCellVariant>
                     <TableCellVariant padding='none'>
-                      <TableBtn value={item.doi} onClick={handleArticleClicked}>
-                        View More
-                      </TableBtn>
+                      {item.recommended ? (
+                        <StarIcon sx={{ color: '#29D6B5' }} />
+                      ) : (
+                        ''
+                      )}
                     </TableCellVariant>
                   </TableRow>
                 )
@@ -311,7 +305,7 @@ export const ArticleTable = () => {
           page={currentPage}
           rowsPerPage={ROWS_PER_PAGE}
           onPageChange={handleNextPage}
-          count={data.length}
+          count={articles.length}
           colSpan={8}
         />
       </TableContainer>

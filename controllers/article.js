@@ -2,7 +2,8 @@ const Article = require('../models/Article')
 const { StatusCodes } = require('http-status-codes')
 
 const getAllArticles = async (req, res) => {
-  res.status(StatusCodes.OK).json({ msg: 'get all articles' })
+  const articles = await Article.find({ status: 'accepted' })
+  res.status(StatusCodes.OK).json(articles)
 }
 
 const getArticle = async (req, res) => {
