@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react'
+import { NavTopBar } from './NavTopBar'
+import { NavSideBar } from './NavSideBar'
 import {
+  Stack,
   Table,
   TableContainer,
   TableHead,
@@ -135,171 +138,185 @@ export const ArticleTable = () => {
 
   return (
     <>
-      <Toolbar>
-        <Input
-          variant='outlined'
-          label='Search by Title'
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position='start'>
-                <Search />
-              </InputAdornment>
-            ),
-          }}
-          onChange={handleSearch}
-        />
-
-        <FormControlLabel
-          label='Advanced Search'
-          sx={{ color: 'white' }}
-          control={<AdvancedFilter />}
-        />
-      </Toolbar>
-      <TableContainer>
-        <Table aria-label='software development process article table'>
-          <TableHead>
-            <TableRow>
-              <TableCellVariant
-                id='title'
-                sortDirection={orderBy === 'title' ? order : false}
-              >
-                <StyledLabel
-                  active={orderBy === 'title'}
-                  direction={orderBy === 'title' ? order : 'asc'}
-                  onClick={() => {
-                    handleSortRequest('title')
-                  }}
-                >
-                  Title
-                </StyledLabel>
-              </TableCellVariant>
-              <TableCellVariant
-                id='authors'
-                sortDirection={orderBy === 'authors' ? order : false}
-              >
-                <StyledLabel
-                  active={orderBy === 'authors'}
-                  direction={orderBy === 'authors' ? order : 'asc'}
-                  onClick={() => {
-                    handleSortRequest('authors')
-                  }}
-                >
-                  Authors
-                </StyledLabel>
-              </TableCellVariant>
-              <TableCellVariant
-                id='source'
-                sortDirection={orderBy === 'source' ? order : false}
-              >
-                <StyledLabel
-                  active={orderBy === 'source'}
-                  direction={orderBy === 'source' ? order : 'asc'}
-                  onClick={() => {
-                    handleSortRequest('source')
-                  }}
-                >
-                  Source
-                </StyledLabel>
-              </TableCellVariant>
-              <TableCellVariant
-                id='pubYear'
-                sortDirection={orderBy === 'pubYear' ? order : false}
-              >
-                <StyledLabel
-                  active={orderBy === 'pubYear'}
-                  direction={orderBy === 'pubYear' ? order : 'asc'}
-                  onClick={() => {
-                    handleSortRequest('pubYear')
-                  }}
-                >
-                  Year Published
-                </StyledLabel>
-              </TableCellVariant>
-              <TableCellVariant
-                id='doi'
-                sortDirection={orderBy === 'doi' ? order : false}
-              >
-                <StyledLabel
-                  active={orderBy === 'doi'}
-                  direction={orderBy === 'doi' ? order : 'asc'}
-                  onClick={() => {
-                    handleSortRequest('doi')
-                  }}
-                >
-                  DOI
-                </StyledLabel>
-              </TableCellVariant>
-              <TableCellVariant
-                id='claimedBenefit'
-                sortDirection={orderBy === 'claimedBenefit' ? order : false}
-              >
-                <StyledLabel
-                  active={orderBy === 'claimedBenefit'}
-                  direction={orderBy === 'claimedBenefit' ? order : 'asc'}
-                  onClick={() => {
-                    handleSortRequest('claimedBenefit')
-                  }}
-                >
-                  Claimed Benefit
-                </StyledLabel>
-              </TableCellVariant>
-              <TableCellVariant
-                id='levelOfEvidence'
-                sortDirection={orderBy === 'levelOfEvidence' ? order : false}
-              >
-                <StyledLabel
-                  active={orderBy === 'levelOfEvidence'}
-                  direction={orderBy === 'levelOfEvidence' ? order : 'asc'}
-                  onClick={() => {
-                    handleSortRequest('levelOfEvidence')
-                  }}
-                >
-                  Level of Evidence
-                </StyledLabel>
-              </TableCellVariant>
-              <TableCellVariant></TableCellVariant>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {stableSort(filterFn.fn(articles), getComparator(order, orderBy))
-              .slice(
-                currentPage * ROWS_PER_PAGE,
-                currentPage * ROWS_PER_PAGE + ROWS_PER_PAGE
-              )
-              .map((item) => {
-                return (
-                  <TableRow key={item.doi} hover>
-                    <TableCellVariant>{item.title}</TableCellVariant>
-                    <TableCellVariant>{item.authors}</TableCellVariant>
-                    <TableCellVariant>{item.source}</TableCellVariant>
-                    <TableCellVariant>{item.pubYear}</TableCellVariant>
-                    <TableCellVariant>{item.doi}</TableCellVariant>
-                    <TableCellVariant>{item.claimedBenefit}</TableCellVariant>
-                    <TableCellVariant>{item.levelOfEvidence}</TableCellVariant>
-                    <TableCellVariant padding='none'>
-                      {item.recommended ? (
-                        <StarIcon sx={{ color: '#29D6B5' }} />
-                      ) : (
-                        ''
-                      )}
-                    </TableCellVariant>
-                  </TableRow>
+      <NavTopBar />
+      <Stack direction='row' gap='3rem'>
+        <NavSideBar />
+        <div>
+          <Toolbar>
+            <Input
+              variant='outlined'
+              label='Search by Title'
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position='start'>
+                    <Search />
+                  </InputAdornment>
+                ),
+              }}
+              onChange={handleSearch}
+            />
+            <FormControlLabel
+              label='Advanced Search'
+              sx={{ color: 'white' }}
+              control={<AdvancedFilter />}
+            />
+          </Toolbar>
+          <TableContainer>
+            <Table aria-label='software development process article table'>
+              <TableHead>
+                <TableRow>
+                  <TableCellVariant
+                    id='title'
+                    sortDirection={orderBy === 'title' ? order : false}
+                  >
+                    <StyledLabel
+                      active={orderBy === 'title'}
+                      direction={orderBy === 'title' ? order : 'asc'}
+                      onClick={() => {
+                        handleSortRequest('title')
+                      }}
+                    >
+                      Title
+                    </StyledLabel>
+                  </TableCellVariant>
+                  <TableCellVariant
+                    id='authors'
+                    sortDirection={orderBy === 'authors' ? order : false}
+                  >
+                    <StyledLabel
+                      active={orderBy === 'authors'}
+                      direction={orderBy === 'authors' ? order : 'asc'}
+                      onClick={() => {
+                        handleSortRequest('authors')
+                      }}
+                    >
+                      Authors
+                    </StyledLabel>
+                  </TableCellVariant>
+                  <TableCellVariant
+                    id='source'
+                    sortDirection={orderBy === 'source' ? order : false}
+                  >
+                    <StyledLabel
+                      active={orderBy === 'source'}
+                      direction={orderBy === 'source' ? order : 'asc'}
+                      onClick={() => {
+                        handleSortRequest('source')
+                      }}
+                    >
+                      Source
+                    </StyledLabel>
+                  </TableCellVariant>
+                  <TableCellVariant
+                    id='pubYear'
+                    sortDirection={orderBy === 'pubYear' ? order : false}
+                  >
+                    <StyledLabel
+                      active={orderBy === 'pubYear'}
+                      direction={orderBy === 'pubYear' ? order : 'asc'}
+                      onClick={() => {
+                        handleSortRequest('pubYear')
+                      }}
+                    >
+                      Year Published
+                    </StyledLabel>
+                  </TableCellVariant>
+                  <TableCellVariant
+                    id='doi'
+                    sortDirection={orderBy === 'doi' ? order : false}
+                  >
+                    <StyledLabel
+                      active={orderBy === 'doi'}
+                      direction={orderBy === 'doi' ? order : 'asc'}
+                      onClick={() => {
+                        handleSortRequest('doi')
+                      }}
+                    >
+                      DOI
+                    </StyledLabel>
+                  </TableCellVariant>
+                  <TableCellVariant
+                    id='claimedBenefit'
+                    sortDirection={orderBy === 'claimedBenefit' ? order : false}
+                  >
+                    <StyledLabel
+                      active={orderBy === 'claimedBenefit'}
+                      direction={orderBy === 'claimedBenefit' ? order : 'asc'}
+                      onClick={() => {
+                        handleSortRequest('claimedBenefit')
+                      }}
+                    >
+                      Claimed Benefit
+                    </StyledLabel>
+                  </TableCellVariant>
+                  <TableCellVariant
+                    id='levelOfEvidence'
+                    sortDirection={
+                      orderBy === 'levelOfEvidence' ? order : false
+                    }
+                  >
+                    <StyledLabel
+                      active={orderBy === 'levelOfEvidence'}
+                      direction={orderBy === 'levelOfEvidence' ? order : 'asc'}
+                      onClick={() => {
+                        handleSortRequest('levelOfEvidence')
+                      }}
+                    >
+                      Level of Evidence
+                    </StyledLabel>
+                  </TableCellVariant>
+                  <TableCellVariant></TableCellVariant>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {stableSort(
+                  filterFn.fn(articles),
+                  getComparator(order, orderBy)
                 )
-              })}
-          </TableBody>
-          <TableFooter></TableFooter>
-        </Table>
-        <TablePaginationVariant
-          color={theme.palette.secondary.main}
-          rowsPerPageOptions={[]}
-          component={Paper}
-          page={currentPage}
-          rowsPerPage={ROWS_PER_PAGE}
-          onPageChange={handleNextPage}
-          count={articles.length}
-          colSpan={8}
-        />
-      </TableContainer>
+                  .slice(
+                    currentPage * ROWS_PER_PAGE,
+                    currentPage * ROWS_PER_PAGE + ROWS_PER_PAGE
+                  )
+                  .map((item) => {
+                    return (
+                      <TableRow key={item.doi} hover>
+                        <TableCellVariant>{item.title}</TableCellVariant>
+                        <TableCellVariant>{item.authors}</TableCellVariant>
+                        <TableCellVariant>{item.source}</TableCellVariant>
+                        <TableCellVariant>{item.pubYear}</TableCellVariant>
+                        <TableCellVariant>{item.doi}</TableCellVariant>
+                        <TableCellVariant>
+                          {item.claimedBenefit}
+                        </TableCellVariant>
+                        <TableCellVariant>
+                          {item.levelOfEvidence}
+                        </TableCellVariant>
+                        <TableCellVariant padding='none'>
+                          {item.recommended ? (
+                            <StarIcon sx={{ color: '#29D6B5' }} />
+                          ) : (
+                            ''
+                          )}
+                        </TableCellVariant>
+                      </TableRow>
+                    )
+                  })}
+              </TableBody>
+              <TableFooter></TableFooter>
+            </Table>
+            <TablePaginationVariant
+              color={theme.palette.secondary.main}
+              rowsPerPageOptions={[]}
+              component={Paper}
+              page={currentPage}
+              rowsPerPage={ROWS_PER_PAGE}
+              onPageChange={handleNextPage}
+              count={articles.length}
+              colSpan={8}
+            />
+          </TableContainer>
+        </div>
+      </Stack>
     </>
   )
 }
