@@ -4,6 +4,10 @@ import { NavSideBar } from './NavSideBar'
 import { Paper, Grid, FormGroup, Stack } from '@mui/material'
 import Controls from './component-controller/Controls'
 import axios from 'axios'
+import { Upload, UploadFile } from '@mui/icons-material'
+import Button from '@mui/material/Button'; 
+import { styled } from '@mui/material/styles';
+import { useTabsList } from '@mui/base'
 
 const initialFormValues = {
   title: '',
@@ -14,6 +18,10 @@ const initialFormValues = {
   claimedBenefit: '',
   levelOfEvidence: '',
 }
+
+const Input = styled('input')({
+  display: 'none',
+});
 
 export default function ArticleForm() {
   const [values, setValues] = useState(initialFormValues)
@@ -29,6 +37,24 @@ export default function ArticleForm() {
   async function handleSubmit() {
     await axios.post('/api/v1/article', values)
   }
+
+  const uploadBib = () => {
+    const fileInput = document.getElementById('picker').files[0]
+
+    console.log(fileInput)
+    var fullText = "error,"
+    var reader = new FileReader();
+    reader.onload = function(event) {
+        fullText = event.target.result
+    };
+    reader.readAsText(fileInput);
+    
+    
+    const entertitle = fullText.split(",")[0]
+    console.log(entertitle)
+    values.title = entertitle
+  }
+  
 
   return (
     <Paper
@@ -108,6 +134,14 @@ export default function ArticleForm() {
               ></Controls.Button>
             </Grid>
           </Grid>
+          <Grid>
+            <label htmlFor="picker">
+        <Input accept="text/plain" id="picker" multiple type="file" onChange={uploadBib}/>
+        <Button variant="contained" component="span">
+          Upload Bibtex
+        </Button>
+        </label>
+            </Grid>
         </FormGroup>
       </Stack>
     </Paper>
